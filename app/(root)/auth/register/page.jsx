@@ -19,7 +19,7 @@ import Image from "next/image"
 import Logo from "@/public/assets/images/logo-black.png"
 import Link from "next/link"
 import { Eye, EyeOff } from "lucide-react"
-import { RegisterSchema } from "@/app/schema/ReisterSchema"
+import { RegisterSchema } from "@/app/schema/RegisterSchema"
 const RegisterPage = () => {
   const [showPassword, setShowPassword] = useState(false)
   const [loading, setLoading] = useState(false)
