@@ -1,6 +1,6 @@
 import React from 'react'
 
-const EmailVerify = () => {
+const EmailVerify = ({params}) => {
   return (
     <div>EmailVerify</div>
   )

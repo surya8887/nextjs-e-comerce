@@ -63,7 +63,7 @@ export async function POST(request) {
       .setExpirationTime("1h") // expires in 1 hour
       .sign(secret);
 
-      await sendMail('Email Verification Request from SuryaExportAndImport',email,emailVerificationLink(`${process.env.NEXT_PUBLIC_BASE_URL}/verify-email/${token}`))
+      await sendMail('Email Verification Request from SuryaExportAndImport',email,emailVerificationLink(`${process.env.NEXT_PUBLIC_BASE_URL}/auth/verify-email/${token}`))
     return NextResponse.json(
       {
         success: true,
