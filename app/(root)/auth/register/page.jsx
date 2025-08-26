@@ -19,7 +19,7 @@ import Image from "next/image"
 import Logo from "@/public/assets/images/logo-black.png"
 import Link from "next/link"
 import { Eye, EyeOff } from "lucide-react"
-import { RegisterSchema } from "@/app/schema/RegisterSchema"
+import { RegisterSchema } from "@/schema/RegisterSchema"
 import axios from "axios"
 const RegisterPage = () => {
   const [showPassword, setShowPassword] = useState(false)
@@ -35,27 +35,27 @@ const RegisterPage = () => {
     },
   })
 
-async function onSubmit(values) {
-  try {
-    setLoading(true);
-    console.log("Register data:", values);
+  async function onSubmit(values) {
+    try {
+      setLoading(true);
+      console.log("Register data:", values);
 
-    const { data: registerResponse } = await axios.post("/api/auth/register", values);
+      const { data: registerResponse } = await axios.post("/api/auth/register", values);
 
-    if (!registerResponse.success) {
-      throw new Error(registerResponse.message || "Registration failed");
+      if (!registerResponse.success) {
+        throw new Error(registerResponse.message || "Registration failed");
+      }
+
+      alert("Registration successful!");
+      // TODO: redirect to login/dashboard
+    } catch (error) {
+      const errorMsg = error.response?.data?.message || error.message || "Something went wrong";
+      alert(errorMsg);
+      console.error("Register error:", error);
+    } finally {
+      setLoading(false);
     }
-
-    alert("Registration successful!");
-    // TODO: redirect to login/dashboard
-  } catch (error) {
-    const errorMsg = error.response?.data?.message || error.message || "Something went wrong";
-    alert(errorMsg);
-    console.error("Register error:", error);
-  } finally {
-    setLoading(false);
   }
-}
 
   return (
     <div className="flex justify-center items-center min-h-screen">

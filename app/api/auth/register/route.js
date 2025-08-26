@@ -1,5 +1,5 @@
 import connectDB from "@/lib/db";
-import { RegisterSchema } from "@/app/schema/RegisterSchema";
+import { RegisterSchema } from "@/schema/RegisterSchema";
 import { NextResponse } from "next/server";
 import User from "@/models/user.model";
 import { SignJWT } from "jose";
@@ -46,7 +46,6 @@ export async function POST(request) {
       );
     }
 
-
     // ✅ Save user
     const newUser = await User.create({
       name,
@@ -63,7 +62,14 @@ export async function POST(request) {
       .setExpirationTime("1h") // expires in 1 hour
       .sign(secret);
 
-      await sendMail('Email Verification Request from SuryaExportAndImport',email,emailVerificationLink(`${process.env.NEXT_PUBLIC_BASE_URL}/auth/verify-email/${token}`))
+    await sendMail(
+      "Email Verification Request from SuryaExportAndImport",
+      email,
+      emailVerificationLink(
+        `${process.env.NEXT_PUBLIC_BASE_URL}/auth/verify-email/${token}`
+      )
+    );
+
     return NextResponse.json(
       {
         success: true,
